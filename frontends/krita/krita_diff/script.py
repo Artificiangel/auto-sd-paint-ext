@@ -113,12 +113,11 @@ class Script(QObject):
         self.node = self.doc.activeNode()
         self.selection = self.doc.selection()
 
-        is_not_selected = (
+        if is_not_selected := (
             self.selection is None
             or self.selection.width() < 1
             or self.selection.height() < 1
-        )
-        if is_not_selected:
+        ):
             self.x = 0
             self.y = 0
             self.width = self.doc.width()

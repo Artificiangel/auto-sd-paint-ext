@@ -280,9 +280,8 @@ class Client(QObject):
                 metadata: Dict[str, List[dict]] = obj[ext_type]
                 for ext_name, ext_meta in metadata.items():
                     old_val = self.ext_cfg(get_ext_key(ext_type, ext_name))
-                    new_val = json.dumps(ext_meta)
                     # Don't overwrite saved script values unless script options changed
-                    if new_val != old_val:
+                    if (new_val := json.dumps(ext_meta)) != old_val:
                         self.ext_cfg.set(get_ext_key(ext_type, ext_name), new_val)
                         for i, opt in enumerate(ext_meta):
                             key = get_ext_key(ext_type, ext_name, i)
